@@ -78,6 +78,101 @@
 <footer class="text-center mt-5 p-3 bg-dark text-light">
   © 2026 ParadoX Cinemas | Experience Beyond Screens
 </footer>
+   
+
+
+
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const form = document.querySelector("form");
+    const submitBtn = document.querySelector(".btn-warning");
+
+    /* Disable button initially */
+    submitBtn.disabled = true;
+    submitBtn.style.opacity = "0.6";
+    submitBtn.style.cursor = "not-allowed";
+
+    function checkFormValidity() {
+        let name = document.querySelector(".form-floating input");
+        let mobile = document.querySelector('input[placeholder="Mobile Number"]');
+        let seatType = document.querySelector('input[name="type"]:checked');
+        let movie = document.querySelector(".form-select");
+        let tickets = document.querySelector('input[placeholder="Number of Tickets"]');
+
+        let mobilePattern = /^[0-9]{10}$/;
+        let valid = true;
+
+        /* Name */
+        if (name.value.trim() === "") {
+            name.setCustomValidity("Please enter your full name");
+            valid = false;
+        } else {
+            name.setCustomValidity("");
+        }
+
+        /* Mobile */
+        if (!mobile.value.match(mobilePattern)) {
+            mobile.setCustomValidity("Please enter a valid 10-digit mobile number");
+            valid = false;
+        } else {
+            mobile.setCustomValidity("");
+        }
+
+        /* Seat Type */
+        if (!seatType) {
+            valid = false;
+        }
+
+        /* Movie */
+        if (movie.value === "Select Movie") {
+            movie.setCustomValidity("Please select a movie");
+            valid = false;
+        } else {
+            movie.setCustomValidity("");
+        }
+
+        /* Tickets */
+        if (tickets.value.trim() === "" || tickets.value <= 0) {
+            tickets.setCustomValidity("Please enter valid number of tickets");
+            valid = false;
+        } else {
+            tickets.setCustomValidity("");
+        }
+
+        /* Enable / Disable Button */
+        if (valid) {
+            submitBtn.disabled = false;
+            submitBtn.style.opacity = "1";
+            submitBtn.style.cursor = "pointer";
+        } else {
+            submitBtn.disabled = true;
+            submitBtn.style.opacity = "0.6";
+            submitBtn.style.cursor = "not-allowed";
+        }
+    }
+
+    /* Live Validation */
+    form.addEventListener("input", checkFormValidity);
+    form.addEventListener("change", checkFormValidity);
+
+    /* Submit Validation */
+    form.addEventListener("submit", function (e) {
+        checkFormValidity();
+
+        if (!form.checkValidity()) {
+            e.preventDefault();
+            form.reportValidity(); /* shows exact field message */
+        } else {
+            alert("Booking Confirmed Successfully!");
+        }
+    });
+});
+</script>
+
+
+
 
 </body>
 </html>
