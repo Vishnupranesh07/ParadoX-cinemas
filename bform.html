@@ -95,10 +95,17 @@ textarea {
 .form-check-input:checked {
     background-color: #ffd700;
     border-color: #ffd700;
+}
 
+/* Validation */
+.error {
+    color: #ff4d4d;
+    font-size: 14px;
+    margin-top: 5px;
+}
 
-
-    
+.success {
+    border: 1px solid #00ff88 !important;
 }
 </style>
 </head>
@@ -106,161 +113,317 @@ textarea {
 <body>
 
 <div class="container py-5">
-  <div class="row justify-content-center">
-    <div class="col-lg-8">
+<div class="row justify-content-center">
+<div class="col-lg-8">
 
-      <div class="form-container">
+<div class="form-container">
 
-        <!-- Theatre Name -->
-        <div class="cinema-title"> ParadoX Cinemas</div>
-        <div class="subtitle">Premium Membership Subscription</div>
+<div class="cinema-title">ParadoX Cinemas</div>
+<div class="subtitle">Premium Membership Subscription</div>
 
-        <form>
+<form id="subscriptionForm">
 
-          <!-- Personal Info -->
-          <h5 class="mb-3">Personal Information</h5>
+<h5 class="mb-3">Personal Information</h5>
 
-          <div class="row mb-3">
-            <div class="col-md-6">
-              <label class="form-label">First Name</label>
-              <input type="text" class="form-control" placeholder="Enter first name" required>
-            </div>
-            <div class="col-md-6">
-              <label class="form-label">Last Name</label>
-              <input type="text" class="form-control" placeholder="Enter last name" required>
-            </div>
-          </div>
-
-          <div class="mb-3">
-            <label class="form-label">Email Address</label>
-            <input type="email" class="form-control" placeholder="example@email.com" required>
-          </div>
-
-          <div class="mb-3">
-            <label class="form-label">Phone Number</label>
-            <input type="tel" class="form-control" placeholder="+91 XXXXX XXXXX" required>
-          </div>
-
-          <!-- Plan -->
-          <h5 class="mt-4 mb-3">Membership Plan</h5>
-
-          <div class="mb-3">
-            <select class="form-select" required>
-              <option selected disabled>Select a plan</option>
-              <option>Silver — ₹999/month</option>
-              <option>Gold — ₹1,999/month</option>
-              <option>Platinum — ₹3,499/month</option>
-            </select>
-          </div>
-
-          <!-- Seat -->
-          <div class="mb-3">
-            <label class="form-label">Preferred Seat Type</label><br>
-
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="seat" required>
-              <label class="form-check-label">Standard</label>
-            </div>
-
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="seat">
-              <label class="form-check-label">Recliner</label>
-            </div>
-
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="seat">
-              <label class="form-check-label">VIP Lounge</label>
-            </div>
-          </div>
-
-          <!-- Add-ons -->
-          <div class="mb-3">
-            <label class="form-label">Add-ons</label>
-
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox">
-              <label class="form-check-label">Unlimited Popcorn & Drinks</label>
-            </div>
-
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox">
-              <label class="form-check-label">Priority Booking</label>
-            </div>
-
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox">
-              <label class="form-check-label">Guest Pass (2/month)</label>
-            </div>
-          </div>
-
-          <!-- Payment -->
-          <h5 class="mt-4 mb-3">Payment Details</h5>
-
-          <div class="mb-3">
-            <input type="text" class="form-control" placeholder="Card Holder Name">
-          </div>
-
-          <div class="mb-3">
-            <input type="text" class="form-control" placeholder="Card Number">
-          </div>
-
-          <div class="row mb-3">
-            <div class="col-md-6">
-              <input type="month" class="form-control">
-            </div>
-            <div class="col-md-6">
-              <input type="password" class="form-control" placeholder="CVV">
-            </div>
-          </div>
-
-<!-- Identity Proof Upload -->
-<div class="mb-3">
-  <h5 class="mt-4 mb-3">Identity Proof</h5>
-  <input type="file" class="form-control" accept=".jpg,.jpeg,.png,.pdf" required>
-  <div class="form-text text-warning">
-    Accepted formats: JPG, PNG, PDF (Max 5MB)
-  </div>
+<div class="row mb-3">
+<div class="col-md-6">
+<label class="form-label">First Name</label>
+<input type="text" id="fname" class="form-control" placeholder="Enter first name">
+<div class="error" id="fnameError"></div>
 </div>
 
+<div class="col-md-6">
+<label class="form-label">Last Name</label>
+<input type="text" id="lname" class="form-control" placeholder="Enter last name">
+<div class="error" id="lnameError"></div>
+</div>
+</div>
 
+<div class="mb-3">
+<label class="form-label">Email Address</label>
+<input type="email" id="email" class="form-control" placeholder="example@email.com">
+<div class="error" id="emailError"></div>
+</div>
 
+<div class="mb-3">
+<label class="form-label">Phone Number</label>
+<input type="tel" id="phone" class="form-control" placeholder="+91 XXXXX XXXXX">
+<div class="error" id="phoneError"></div>
+</div>
 
-          <!-- Terms -->
-          <div class="form-check mb-4">
-            <input class="form-check-input" type="checkbox" required>
-            <label class="form-check-label">
-              I agree to Terms & Conditions
-            </label>
-          </div>
+<h5 class="mt-4 mb-3">Membership Plan</h5>
 
-          <!-- Buttons -->
-          <div class="d-grid gap-2">
-            <button type="submit" class="btn btn-premium btn-lg">
-              Subscribe Now
-            </button>
-            <button type="reset" class="btn btn-outline-light">
-              Reset
-            </button>
-          </div>
+<div class="mb-3">
+<select id="plan" class="form-select">
+<option selected disabled value="">Select a plan</option>
+<option>Silver — ₹999/month</option>
+<option>Gold — ₹1,999/month</option>
+<option>Platinum — ₹3,499/month</option>
+</select>
+<div class="error" id="planError"></div>
+</div>
 
-        </form>
+<div class="mb-3">
+<label class="form-label">Preferred Seat Type</label><br>
 
-      </div>
-    </div>
-  </div>
+<div class="form-check form-check-inline">
+<input class="form-check-input" type="radio" name="seat" value="Standard">
+<label class="form-check-label">Standard</label>
+</div>
+
+<div class="form-check form-check-inline">
+<input class="form-check-input" type="radio" name="seat" value="Recliner">
+<label class="form-check-label">Recliner</label>
+</div>
+
+<div class="form-check form-check-inline">
+<input class="form-check-input" type="radio" name="seat" value="VIP Lounge">
+<label class="form-check-label">VIP Lounge</label>
+</div>
+
+<div class="error" id="seatError"></div>
+</div>
+
+<div class="mb-3">
+<label class="form-label">Add-ons</label>
+
+<div class="form-check">
+<input class="form-check-input addon" type="checkbox">
+<label class="form-check-label">Unlimited Popcorn & Drinks</label>
+</div>
+
+<div class="form-check">
+<input class="form-check-input addon" type="checkbox">
+<label class="form-check-label">Priority Booking</label>
+</div>
+
+<div class="form-check">
+<input class="form-check-input addon" type="checkbox">
+<label class="form-check-label">Guest Pass (2/month)</label>
+</div>
+
+<div class="error" id="addonError"></div>
+</div>
+
+<h5 class="mt-4 mb-3">Payment Details</h5>
+
+<div class="mb-3">
+<input type="text" id="cardName" class="form-control" placeholder="Card Holder Name">
+<div class="error" id="cardNameError"></div>
+</div>
+
+<div class="mb-3">
+<input type="text" id="cardNumber" class="form-control" placeholder="Card Number">
+<div class="error" id="cardNumberError"></div>
+</div>
+
+<div class="row mb-3">
+<div class="col-md-6">
+<input type="month" id="expiry" class="form-control">
+<div class="error" id="expiryError"></div>
+</div>
+
+<div class="col-md-6">
+<input type="password" id="cvv" class="form-control" placeholder="CVV">
+<div class="error" id="cvvError"></div>
+</div>
+</div>
+
+<div class="mb-3">
+<h5 class="mt-4 mb-3">Identity Proof</h5>
+<input type="file" id="file" class="form-control" accept=".jpg,.jpeg,.png,.pdf">
+<div class="form-text text-warning">
+Accepted formats: JPG, PNG, PDF (Max 5MB)
+</div>
+<div class="error" id="fileError"></div>
+</div>
+
+<div class="form-check mb-4">
+<input class="form-check-input" type="checkbox" id="terms">
+<label class="form-check-label">
+I agree to Terms & Conditions
+</label>
+<div class="error" id="termsError"></div>
+</div>
+
+<div class="d-grid gap-2">
+<button type="submit" class="btn btn-premium btn-lg">
+Subscribe Now
+</button>
+
+<button type="reset" class="btn btn-outline-light">
+Reset
+</button>
+</div>
+
+</form>
+</div>
+</div>
+</div>
 </div>
 
 <center>
 <a href="index.html" class="btn btn-warning">
-  ← Back to Home
-</a> </center>
-<br>
-<br>
-<hr>
+← Back to Home
+</a>
+</center>
+
+<br><br><hr>
 
 <footer class="text-center mt-5 p-3 bg-dark text-light">
-  © 2026 ParadoX Cinemas | Experience Beyond Screens
+© 2026 ParadoX Cinemas | Experience Beyond Screens
 </footer>
+
+<script>
+document.getElementById("subscriptionForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    let valid = true;
+
+    function setError(id, message) {
+        document.getElementById(id).innerText = message;
+        valid = false;
+    }
+
+    function clearErrors() {
+        let errors = document.querySelectorAll(".error");
+        errors.forEach(error => error.innerText = "");
+    }
+
+    clearErrors();
+
+    let fname = document.getElementById("fname").value.trim();
+    let lname = document.getElementById("lname").value.trim();
+    let email = document.getElementById("email").value.trim();
+    let phone = document.getElementById("phone").value.trim();
+    let plan = document.getElementById("plan").value;
+    let seat = document.querySelector('input[name="seat"]:checked');
+    let addons = document.querySelectorAll(".addon:checked");
+    let cardName = document.getElementById("cardName").value.trim();
+    let cardNumber = document.getElementById("cardNumber").value.trim();
+    let expiry = document.getElementById("expiry").value;
+    let cvv = document.getElementById("cvv").value.trim();
+    let file = document.getElementById("file").files.length;
+    let terms = document.getElementById("terms").checked;
+
+    let emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+    let phonePattern = /^[0-9]{10}$/;
+    let cardPattern = /^[0-9]{16}$/;
+    let cvvPattern = /^[0-9]{3}$/;
+
+    if (fname === "") {
+        setError("fnameError", "First name is required");
+    }
+
+    if (lname === "") {
+        setError("lnameError", "Last name is required");
+    }
+
+    if (!email.match(emailPattern)) {
+        setError("emailError", "Enter a valid email address");
+    }
+
+    if (!phone.match(phonePattern)) {
+        setError("phoneError", "Enter a valid 10-digit phone number");
+    }
+
+    if (plan === "") {
+        setError("planError", "Please select a membership plan");
+    }
+
+    if (!seat) {
+        setError("seatError", "Please select a seat type");
+    }
+
+    if (addons.length === 0) {
+        setError("addonError", "Select at least one add-on");
+    }
+
+    if (cardName === "") {
+        setError("cardNameError", "Card holder name is required");
+    }
+
+    if (!cardNumber.match(cardPattern)) {
+        setError("cardNumberError", "Card number must be 16 digits");
+    }
+
+    if (expiry === "") {
+        setError("expiryError", "Select expiry date");
+    }
+
+    if (!cvv.match(cvvPattern)) {
+        setError("cvvError", "CVV must be 3 digits");
+    }
+
+    if (file === 0) {
+        setError("fileError", "Please upload identity proof");
+    }
+
+    if (!terms) {
+        setError("termsError", "You must accept Terms & Conditions");
+    }
+
+    if (valid) {
+        alert("Subscription Successful!");
+        document.getElementById("subscriptionForm").reset();
+    }
+
+
+const form = document.getElementById("subscriptionForm");
+const submitBtn = document.querySelector('button[type="submit"]');
+
+/* Disable button initially */
+submitBtn.disabled = true;
+submitBtn.style.opacity = "0.6";
+submitBtn.style.cursor = "not-allowed";
+
+/* Function to check all fields */
+function checkFormValidity() {
+    let fname = document.getElementById("fname").value.trim();
+    let lname = document.getElementById("lname").value.trim();
+    let email = document.getElementById("email").value.trim();
+    let phone = document.getElementById("phone").value.trim();
+    let plan = document.getElementById("plan").value;
+    let seat = document.querySelector('input[name="seat"]:checked');
+    let addons = document.querySelectorAll(".addon:checked");
+    let cardName = document.getElementById("cardName").value.trim();
+    let cardNumber = document.getElementById("cardNumber").value.trim();
+    let expiry = document.getElementById("expiry").value;
+    let cvv = document.getElementById("cvv").value.trim();
+    let file = document.getElementById("file").files.length;
+    let terms = document.getElementById("terms").checked;
+
+    if (
+        fname !== "" &&
+        lname !== "" &&
+        email !== "" &&
+        phone !== "" &&
+        plan !== "" &&
+        seat &&
+        addons.length > 0 &&
+        cardName !== "" &&
+        cardNumber !== "" &&
+        expiry !== "" &&
+        cvv !== "" &&
+        file > 0 &&
+        terms
+    ) {
+        submitBtn.disabled = false;
+        submitBtn.style.opacity = "1";
+        submitBtn.style.cursor = "pointer";
+    } else {
+        submitBtn.disabled = true;
+        submitBtn.style.opacity = "0.6";
+        submitBtn.style.cursor = "not-allowed";
+    }
+}
+
+/* Run check whenever user changes input */
+form.addEventListener("input", checkFormValidity);
+form.addEventListener("change", checkFormValidity);
+
+});
+</script>
 
 </body>
 </html>
